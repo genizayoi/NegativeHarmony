@@ -1,0 +1,9 @@
+Mode.Diminished,io,#io,biio,iio,#iio,biiio,iiio,ivo,#ivo,bvo,vo,#vo,bvio,vio,#vio,bviio,viio,#iiio
+Mode.Locrian,iø,#iø,biiø,iiø,#iiø,biiiø,iiiø,ivø,#ivø,bvø,vø,#vø,bviø,viø,bviiø,viiø,#viø
+Mode.Aeolian,i,#i,bii,#ii,biii,#iv,bv,#v,bvi,vi,#vi,bvii,vii
+Mode.Ionian,I,#I,bII,II,#II,bIII,III,#IV,bV,#V,VI,#VI,VII
+Mode.Augmented,I+,#I+,bII+,II+,#II+,bIII+,III+,IV+,#IV+,bV+,V+,#V+,bVI+,VI+,#VI+,bVII+,VII+
+Mode.Dorian,ii,iv
+Mode.Phrygian,iii,v,#iii
+Mode.Lydian,IV,bVI
+Mode.Mixolydian,V,bVII
