@@ -1,22 +1,5 @@
 import csv
-
-
-#Array for musical objects
-class MArray:
-    mlist = None
-
-    def __init__(self, item):
-        self.mlist = item
-
-    def __getitem__(self, key):
-        return self.mlist[key % len(self.mlist)]
-
-    def getIndex(self, item):
-        return self.mlist.index(item)
-
-    def getItemByDistance(self, item, distance):
-        return self.__getitem__(self.getIndex(item)+distance)
-
+from MArray import MArray
 
 #Return Dictionary objects from 'config_files/*.csv
 class MDictionaryLoader:
@@ -25,6 +8,8 @@ class MDictionaryLoader:
     chords_dictionary = {}
     rome_chord_dictionary = {}
     text_adapter_dictionary = {}
+    sub_colors = None
+    main_color = None
 
     def __init__(self, config_section):
         self.load_alphabetic_array(config_section['alphabetic_array'])
@@ -34,6 +19,10 @@ class MDictionaryLoader:
             config_section['rome_chord_dictionary'])
         self.load_text_adapter_dictionary(
             config_section['text_adapter_dictionary'])
+        self.sub_colors = MArray([config_section['1st_color'], 
+                            config_section['2nd_color'], 
+                            config_section['3rd_color']])
+        self.main_color = config_section['4th_color']
 
     def load_alphabetic_array(self, path):
         with open(path, encoding='utf-8') as f:
