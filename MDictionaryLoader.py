@@ -1,9 +1,8 @@
 import csv
 from MArray import MArray
 
+
 #Return Dictionary objects from 'config_files/*.csv
-
-
 class MDictionaryLoader:
     alphabetic_array = None
     solmization_array = None

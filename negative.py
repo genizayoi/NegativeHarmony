@@ -1,15 +1,13 @@
 import configparser
-#import numpy as np
-#from matplotlib import pyplot as plt
-#from numpy.core.machar import MachAr
 import click
 import os
 from NegativeModeling import MusicPiece
 from MDictionaryLoader import MDictionaryLoader
 from tqdm import tqdm
+
+
 #defaule config file path
 CONFIG_FILE_PATH = 'config_files/setting.conf'
-
 
 @click.command()
 @click.option('--recursive', '-r', '-R', is_flag=True, help='Option to apply each listed directory.')
