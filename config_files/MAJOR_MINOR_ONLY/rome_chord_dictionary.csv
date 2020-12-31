@@ -1,15 +1,15 @@
 Diminished,io,#io,biio,iio,#iio,biiio,iiio,ivo,#ivo,bvo,vo,#vo,bvio,vio,#vio,bviio,viio,#iiio
 Diminished,iø,#iø,biiø,iiø,#iiø,biiiø,iiiø,ivø,#ivø,bvø,vø,#vø,bviø,viø,bviiø,viiø,#viø,iØ,#iØ,biiØ,iiØ,#iiØ,biiiØ,iiiØ,ivØ,#ivØ,bvØ,vØ,#vØ,bviØ,viØ,bviiØ,viiØ,#viØ
-Aeolian,i,#i,bii,#ii,biii,#iv,bv,#v,bvi,vi,#vi,bvii,vii
-Ionian,I,#I,bII,II,#II,bIII,III,#IV,bV,#V,VI,#VI,VII
+Minor13,i,#i,bii,#ii,biii,#iv,bv,#v,bvi,vi,#vi,bvii,vii
+Major13,I,#I,bII,II,#II,bIII,III,#IV,bV,#V,VI,#VI,VII
 Augmented,I+,#I+,bII+,II+,#II+,bIII+,III+,IV+,#IV+,bV+,V+,#V+,bVI+,VI+,#VI+,bVII+,VII+
-Aeolian,ii,iv
-Aeolian,iii,v,#iii
-Ionian,IV,bVI
-Ionian,V,bVII
-Ionian,Ger,It,V I,Fr
-Aeolian,Cad,i:
-Aeolian,ivb
+Minor13,ii,iv
+Minor13,iii,v,#iii
+Major13,IV,bVI
+Major13,V,bVII
+Major13,Ger,It,V I,Fr
+Minor13,Cad,i:
+Minor13,ivb
 Diminished,iioø,VIo
-Locrian,#iiiø,VIø
+Minor13b5b9,#iiiø,VIø
 Augmented,iii+
