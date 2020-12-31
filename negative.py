@@ -10,14 +10,17 @@ from tqdm import tqdm
 #defaule config file path
 CONFIG_FILE_PATH = 'config_files/setting.conf'
 
+
 @click.command()
 @click.option('--recursive', '-r', '-R', is_flag=True, help='Option to apply each listed directory.')
 @click.argument('file_name_path', type=click.Path(exists=True))
-@click.option('--mode', '-m', '-M', default='N', help='CLASS = [ N | N+ | N+part1 | N+part2 | prepare ] Determine the mode of the algorithm. default="N"')
-#@click.option('--seed', '-s', '-S', default=0, type=int, help='Integer seed for N+random mode.')
 @click.option('--config_section_name', '-c', '-C', default='DEFAULT', help='Config section name in config_files/setting.conf. default="DEFAULT"')
+@click.option('--mode', '-m', '-M', default='N', help='CLASS = [ N | N+ | N+part1 | N+part2 | prepare ] Determine the mode of the algorithm. default="N"')
+@click.option('--analyze', '-a', '-A', is_flag=True, help='Option to analyze and generate romanNumeral part.')
+#@click.option('--seed', '-s', '-S', default=0, type=int, help='Integer seed for N+random mode.')
+@click.option('--delete_analysis_part', '-d', '-D', is_flag=True, help='Option to remove the analysis part in the stream.')
 @click.option('--extension', '-e', '-E', default='mxl', help='CLASS = [ mxl | xml | midi | ... ] File extension for saving. default="mxl"')
-def main(recursive, file_name_path, mode, config_section_name, extension):
+def main(recursive, file_name_path, config_section_name, mode, analyze, delete_analysis_part, extension):
 
     #load section in config file and makedir for save_path
     config = configparser.ConfigParser()
@@ -26,7 +29,7 @@ def main(recursive, file_name_path, mode, config_section_name, extension):
     dirname, filename = os.path.split(file_name_path)
     SAVE_PATH = dirname + config_section['save_path']
     if not os.path.isabs(dirname):
-        SAVE_PATH = './'+ SAVE_PATH
+        SAVE_PATH = './' + SAVE_PATH
     os.makedirs(SAVE_PATH, exist_ok=True)
 
     #organize the PATH of the target file into a list [['~/example/filename.xml','filename']...]
@@ -57,11 +60,11 @@ def main(recursive, file_name_path, mode, config_section_name, extension):
     tqdm_array = tqdm(target_file_path_array)
     for item in tqdm_array:
         tqdm_array.set_description(item[1])
-        music_piece = MusicPiece(item[0])
+        music_piece = MusicPiece(item[0], analyze, delete_analysis_part)
 
         if mode == 'N':
             music_piece.NegativePieceByMode_N(mDictionary)
-        elif mode == 'N+':  
+        elif mode == 'N+':
             music_piece.NegativePieceByMode_N_PLUS(mDictionary)
         elif mode == 'N+part1':
             music_piece.NegativePieceByMode_N_PLUS_PART(mDictionary, 'V')
@@ -70,7 +73,9 @@ def main(recursive, file_name_path, mode, config_section_name, extension):
         elif mode == 'prepare':
             music_piece.NegativePreparation(mDictionary)
 
-        music_piece.saveNegativeAsFile(SAVE_PATH + '/' + item[1].split('.')[0] + '.' + extension, extension)
+        music_piece.saveNegativeAsFile(
+            mDictionary, SAVE_PATH + '/' + item[1].split('.')[0] + '.' + extension, extension)
+
 
 if __name__ == '__main__':
     main()

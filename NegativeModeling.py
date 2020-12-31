@@ -1,12 +1,11 @@
-from music21 import converter, analysis, environment
+from music21 import converter, analysis, environment, roman
 import os
 import copy
 import re
 from re import match
 
+
 #class for musicpieces, it has functions like getNegativePiece()
-
-
 class MusicPiece:
     originally_piece = None
     negative_piece = None
@@ -15,10 +14,35 @@ class MusicPiece:
     analyze_parts_dictionary = {}
     score_array = []
 
-    def __init__(self, pieceFilePath):
+    is_analyze = False
+    is_remove_analysis_part = False
+
+    def __init__(self, pieceFilePath, is_analyze, delete_analysis_part):
         #print(pieceFilePath)
         self.originally_piece = converter.parse(pieceFilePath)
         #print(self.originally_piece)
+        self.is_analyze = is_analyze
+        self.is_remove_analysis_part = delete_analysis_part
+
+    #Option to analyze and generate romanNumeral part.
+    def analyzeNegativePiece(self, mDictionary):
+        for score_id in self.parts_dictionary:
+            score = self.parts_dictionary[score_id].activeSite
+            key_ = analysis.discrete.analyzeStream(score, 'key')
+            analysis_part = score.chordify()
+            analysis_part.partName = mDictionary.analysis_part_id[0]
+            analysis_part.id = mDictionary.analysis_part_id[0]
+            score.insert(0, analysis_part)
+            is_first = True
+            for chord in analysis_part.recurse().getElementsByClass('Chord'):
+                chord.closedPosition(forceOctave=4, inPlace=True)
+                rn = roman.romanNumeralFromChord(chord, key_)
+                if is_first:
+                    chord.addLyric(key_.tonicPitchNameWithCase +
+                                   ': ' + str(rn.figure))
+                    is_first = False
+                else:
+                    chord.addLyric(str(rn.figure))
 
     #deepcopy from originally_piece and renew the parts/analyze_parts dictonary
     def renewNegativePiece(self, mDictionary):
@@ -27,6 +51,15 @@ class MusicPiece:
         self.parts_dictionary = {}
         self.analyze_parts_dictionary = {}
         self.score_array = []
+
+        if self.is_analyze:
+            for part in self.negative_piece.recurse().parts:
+                if part.id in mDictionary.analysis_part_id:
+                    part.activeSite.remove(part)
+                else:
+                    self.parts_dictionary[part.activeSite.id] = part
+            self.analyzeNegativePiece(mDictionary)
+
         #find all scores in a stream like {score_id:last part of the score}
         for part in self.negative_piece.recurse().parts:
             self.parts_dictionary[part.activeSite.id] = part
@@ -36,7 +69,7 @@ class MusicPiece:
     #change the Rome lyric to chord text
     def anlyzeRome(self, mDictionary):
         if not self.analyze_parts_dictionary:
-            print('do not have analyze part in this stream.')
+            print(' Do not have analyze part in this stream.')
             return False
         else:
             #Loop through all of the analyze part score in a stream
@@ -216,7 +249,7 @@ class MusicPiece:
                         harmony_part[3] = True
                         if index__+2 < len(score_pair[1]):
                             distance__next = mDictionary.alphabetic_array.getIndex(
-                                score_pair[1][index__+1][0].lyrics[0].text)- mDictionary.alphabetic_array.getIndex(
+                                score_pair[1][index__+1][0].lyrics[0].text) - mDictionary.alphabetic_array.getIndex(
                                 score_pair[1][index__+2][0].lyrics[0].text)
                             if distance__next != 7 and distance__next != -5:
                                 is_change = True
@@ -245,5 +278,9 @@ class MusicPiece:
                             mDictionary.alphabetic_array[harmony_part[5]])
                     harmony_part[0].addLyric(harmony_part[6])
 
-    def saveNegativeAsFile(self, savePath ,extension):
+    def saveNegativeAsFile(self, mDictionary, savePath, extension):
+        if self.is_remove_analysis_part:
+            for part in self.negative_piece.recurse().parts:
+                if part.id in mDictionary.analysis_part_id:
+                    part.activeSite.remove(part)
         self.negative_piece.write(extension, savePath)

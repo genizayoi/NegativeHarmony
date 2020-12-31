@@ -1,0 +1,11 @@
+Ionian,7,Aeolian,0,0,0,-1,-1,0,0,0,-1,-1,-1,-1
+Dorian,7,Mixolydian,0,0,0,1,1,0,0,0,0,0,0,0
+Phrygian,7,Lydian,0,1,1,1,1,1,1,0,1,1,1,1
+Lydian,7,Phrygian,0,-1,-1,-1,-1,-1,-1,0,-1,-1,-1,-1
+Mixolydian,7,Dorian,0,0,0,-1,-1,0,0,0,0,0,0,0
+Aeolian,7,Ionian,0,0,0,1,1,0,0,0,1,1,1,1
+Locrian,6,Locrian,0,0,0,0,0,0,0,0,0,0,0,0
+Hexatonic,6,Hexatonic,0,0,0,0,0,0,0,0,0,0,0,0
+Diminished,6,Diminished,0,0,0,0,0,0,0,0,0,0,0,0
+Augmented,8,Augmented,0,0,0,0,0,0,0,0,0,0,0,0
+Chromatic,7,Chromatic,0,0,0,0,0,0,0,0,0,0,0,0

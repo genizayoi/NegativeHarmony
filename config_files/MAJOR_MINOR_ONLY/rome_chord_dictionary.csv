@@ -1,15 +1,15 @@
 Diminished,io,#io,biio,iio,#iio,biiio,iiio,ivo,#ivo,bvo,vo,#vo,bvio,vio,#vio,bviio,viio,#iiio
-Locrian,iø,#iø,biiø,iiø,#iiø,biiiø,iiiø,ivø,#ivø,bvø,vø,#vø,bviø,viø,bviiø,viiø,#viø,iØ,#iØ,biiØ,iiØ,#iiØ,biiiØ,iiiØ,ivØ,#ivØ,bvØ,vØ,#vØ,bviØ,viØ,bviiØ,viiØ,#viØ
+Diminished,iø,#iø,biiø,iiø,#iiø,biiiø,iiiø,ivø,#ivø,bvø,vø,#vø,bviø,viø,bviiø,viiø,#viø,iØ,#iØ,biiØ,iiØ,#iiØ,biiiØ,iiiØ,ivØ,#ivØ,bvØ,vØ,#vØ,bviØ,viØ,bviiØ,viiØ,#viØ
 Aeolian,i,#i,bii,#ii,biii,#iv,bv,#v,bvi,vi,#vi,bvii,vii
 Ionian,I,#I,bII,II,#II,bIII,III,#IV,bV,#V,VI,#VI,VII
 Augmented,I+,#I+,bII+,II+,#II+,bIII+,III+,IV+,#IV+,bV+,V+,#V+,bVI+,VI+,#VI+,bVII+,VII+
-Dorian,ii,iv
-Phrygian,iii,v,#iii
-Lydian,IV,bVI
-Mixolydian,V,bVII
-Mixolydian,Ger,It,V I,Fr
+Aeolian,ii,iv
+Aeolian,iii,v,#iii
+Ionian,IV,bVI
+Ionian,V,bVII
+Ionian,Ger,It,V I,Fr
 Aeolian,Cad,i:
-Phrygian,ivb
+Aeolian,ivb
 Diminished,iioø,VIo
 Locrian,#iiiø,VIø
 Augmented,iii+

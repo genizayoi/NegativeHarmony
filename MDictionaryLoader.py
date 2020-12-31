@@ -2,6 +2,8 @@ import csv
 from MArray import MArray
 
 #Return Dictionary objects from 'config_files/*.csv
+
+
 class MDictionaryLoader:
     alphabetic_array = None
     solmization_array = None
@@ -20,9 +22,9 @@ class MDictionaryLoader:
             config_section['rome_chord_dictionary'])
         self.load_text_adapter_dictionary(
             config_section['text_adapter_dictionary'])
-        self.sub_colors = MArray([config_section['1st_color'], 
-                            config_section['2nd_color'], 
-                            config_section['3rd_color']])
+        self.sub_colors = MArray([config_section['1st_color'],
+                                  config_section['2nd_color'],
+                                  config_section['3rd_color']])
         self.main_color = config_section['4th_color']
         self.analysis_part_id = config_section['analysis_part_id'].split('|')
 
@@ -50,7 +52,8 @@ class MDictionaryLoader:
                      "negativeModeName": row[2],
                      "adapter": MArray([int(row[3]), int(row[4]), int(row[5]),
                                         int(row[6]), int(row[7]), int(row[8]),
-                                        int(row[9]), int(row[10]), int(row[11]),
+                                        int(row[9]), int(
+                                            row[10]), int(row[11]),
                                         int(row[12]), int(row[13]), int(row[14])])
                      }}
                 )
