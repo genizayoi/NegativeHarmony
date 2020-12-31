@@ -21,7 +21,7 @@ class MusicPiece:
         #print(self.originally_piece)
 
     #deepcopy from originally_piece and renew the parts/analyze_parts dictonary
-    def renewNegativePiece(self):
+    def renewNegativePiece(self, mDictionary):
         #deepcopy and renew dictionary
         self.negative_piece = copy.deepcopy(self.originally_piece)
         self.parts_dictionary = {}
@@ -30,7 +30,7 @@ class MusicPiece:
         #find all scores in a stream like {score_id:last part of the score}
         for part in self.negative_piece.recurse().parts:
             self.parts_dictionary[part.activeSite.id] = part
-            if part.id == 'Analysis':
+            if part.id in mDictionary.analysis_part_id:
                 self.analyze_parts_dictionary[part.activeSite.id] = part
 
     #change the Rome lyric to chord text
@@ -44,8 +44,10 @@ class MusicPiece:
                 analyze_part = self.analyze_parts_dictionary[score_id]
                 score = analyze_part.activeSite
                 analyze_array = []
+                key_record = None
                 #loop through all notes in analyze part
                 for note_ in analyze_part.recurse().notes:
+                    note_.volume.velocity = 0
                     if note_.lyric is not None:
                         #append lyric Note object and offset to analyze array
                         analyze_array.append(
@@ -53,6 +55,15 @@ class MusicPiece:
                         lyric_ = note_.lyric
                         lyric___ = note_.lyric
                         note_.lyric = None
+                        double_ned_index = lyric_.find('//')
+                        if double_ned_index != -1:
+                            lyric_ = lyric_[:double_ned_index]
+                        bracket_l_index = lyric_.find('[')
+                        bracket_r_index = lyric_.find(']')
+                        if bracket_l_index != -1 and bracket_r_index != -1:
+                            lyric_l = lyric_[:bracket_l_index]
+                            lyric_r = lyric_[bracket_r_index+1:]
+                            lyric_ = lyric_l + lyric_r
                         char_index = lyric_.find(': ')
                         neb_index = lyric_.find('/')
                         neb = None
@@ -146,13 +157,13 @@ class MusicPiece:
                 color_index += 1
 
     def NegativePreparation(self, mDictionary):
-        self.renewNegativePiece()
+        self.renewNegativePiece(mDictionary)
         self.anlyzeRome(mDictionary)
         self.calculateNegativeIndex(mDictionary)
 
     #N modeling
     def NegativePieceByMode_N(self, mDictionary):
-        self.renewNegativePiece()
+        self.renewNegativePiece(mDictionary)
         ambitusAnalyzer = analysis.discrete.Ambitus()
 
         #Loop through all of the score in a stream
@@ -234,5 +245,5 @@ class MusicPiece:
                             mDictionary.alphabetic_array[harmony_part[5]])
                     harmony_part[0].addLyric(harmony_part[6])
 
-    def saveNegativeAsXML(self, savePath):
-        self.negative_piece.write('xml', savePath)
+    def saveNegativeAsFile(self, savePath ,extension):
+        self.negative_piece.write(extension, savePath)
