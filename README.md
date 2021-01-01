@@ -39,7 +39,7 @@ git clone https://github.com/sohoelf/When-in-Rome
 I organized music pieces in the ```When-in-Rome/analysis_on_score_pieces``` folder.  
 If you want to apply this modeling to music pieces that doesn't have Rome analysis part,  
 you also can use the ```--analyze``` option. (I will introduce it in the next chapter.)  
-## 3. Generate Negative music pieces
+## 3. Generate Negative Music Pieces
 Usage: 
 ```
 python3 negative.py [OPTIONS] <FILE_NAME_PATH>
@@ -73,7 +73,7 @@ Use the ```-d``` option to remove the Rome analysis part immediately before outp
 ```
 python3 negative.py -m N+ ~/music_piece -e midi -d
 ``` 
-## 4. Actual example
+## 4. Actual Example
 ```
 cd ~
 git clone https://github.com/sohoelf/NegativeHarmony
