@@ -49,7 +49,7 @@ def main(recursive, file_name_path, config_section_name, mode, analyze, delete_a
             print(
                 'Error: file_name_path is a directory, maybe you should use the -r option')
             return
-        target_file_path_array.append([file_name_path, filename])
+        target_file_path_array.append([file_name_path, os.path.splitext(filename)[0]])
 
     #generate musical dictionary through config file and csv files
     mDictionary = MDictionaryLoader(config_section)
@@ -72,7 +72,7 @@ def main(recursive, file_name_path, config_section_name, mode, analyze, delete_a
             music_piece.NegativePreparation(mDictionary)
 
         music_piece.saveNegativeAsFile(
-            mDictionary, SAVE_PATH + '/' + item[1].split('.')[0] + '.' + extension, extension)
+            mDictionary, SAVE_PATH + '/' + item[1] + '.' + extension, extension)
 
 
 if __name__ == '__main__':
