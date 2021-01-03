@@ -281,6 +281,6 @@ class MusicPiece:
     def saveNegativeAsFile(self, mDictionary, savePath, extension):
         if self.is_remove_analysis_part:
             for part in self.negative_piece.recurse().parts:
-                if part.id in mDictionary.analysis_part_id:
+                if part.partName in mDictionary.remove_part_id or part.id in mDictionary.remove_part_id:
                     part.activeSite.remove(part)
         self.negative_piece.write(extension, savePath)

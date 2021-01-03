@@ -12,6 +12,7 @@ class MDictionaryLoader:
     sub_colors = None
     main_color = None
     analysis_part_id = None
+    remove_part_id = None
 
     def __init__(self, config_section):
         self.load_alphabetic_array(config_section['alphabetic_array'])
@@ -26,6 +27,7 @@ class MDictionaryLoader:
                                   config_section['3rd_color']])
         self.main_color = config_section['4th_color']
         self.analysis_part_id = config_section['analysis_part_id'].split('|')
+        self.remove_part_id = config_section['remove_part_id'].split('|')
 
     def load_alphabetic_array(self, path):
         with open(path, encoding='utf-8') as f:
