@@ -1,0 +1,137 @@
+@startuml objectDiagramForMusic21
+left to right direction
+
+skinparam monochrome reverse
+object "<u>s: steam.Score</u>" as stream.Score {
+  ...
+}
+
+map "<u>:Map<base.Music21Object></u>" as stream_Stream_map {
+  0 => :Atext.TextBox
+  1 => :Atext.TextBox
+  2 => :Atext.TextBox
+  3 => :metadata.Metadata
+  4 => :stream.Part
+  5 => :stream.Part
+  6 => :stream.Part
+  7 => :layout.ScoreLayout
+}
+
+map "<u>:Map<base.Music21Object></u>" as stream_Part_map_0 {
+  0 => :instrument.Instrument
+  1 => :stream.Measure
+  .. => ...
+  24 => :stream.Measure
+  ... => ...
+  35 => :stream.Measure
+}
+
+map "<u>:Map<base.Music21Object></u>" as stream_Measure_map_0 {
+  0 => :layout.SystemLayout
+  1 => :clef.TrebleClef
+  2 => :Tempo.MetronomeMark
+  3 => :key.KeySignature
+  4 => :meter.TimeSignature
+  5 => :note.Rest
+  6 => :note.Note
+  7 => :note.Note
+  ... => ...
+  18 => :note.Note
+}
+
+map "<u>:Map<base.Music21Object></u>" as stream_Measure_map_1 {
+  0 => :layout.PageLayout
+  1 => :layout.SystemLayout
+  2 => :note.Rest
+  3 => :note.Note
+  ... => ...
+}
+
+map "<u>:Map<base.Music21Object></u>" as stream_Measure_map_2 {
+  0 => :chord.Chord
+  1 => :bar.Barline
+}
+
+map "<u>:Map<base.Music21Object></u>" as stream_Part_map_1 {
+  0 => :instrument.Instrument
+  1 => :stream.Measure
+  .. => ...
+  35 => :stream.Measure
+}
+
+map "<u>:Map<base.Music21Object></u>" as stream_Measure_map_3 {
+  .. => ...
+  1 => :layout.StaffLayout
+  2 => :clef.BassClef
+  ... => ...
+  6 => :stream.Voice
+  7 => :stream.Voice
+}
+
+map "<u>:Map<note.GeneralNote></u>" as stream_Voice_map_0 {
+  0 => :note.Rest
+  1 => :note.Note
+  2 => :note.Note
+  3 => :note.Rest
+  4 => :note.Note
+  5 => :note.Note
+}
+
+map "<u>:Map<base.Music21Object></u>" as stream_Part_map_2 {
+  0 => :instrument.Instrument
+  1 => :stream.Measure
+  .. => ...
+  35 => :stream.Measure
+}
+
+map "<u>:Map<base.Music21Object></u>" as stream_Measure_map_4 {
+  0 => :key.Key
+  1 => :meter.TimeSignature
+  2 => :chord.Chord
+}
+
+stream.Score *-- stream_Stream_map
+stream_Part_map_0 --* stream_Stream_map::4
+stream_Measure_map_0 --* stream_Part_map_0::1
+stream_Measure_map_1 --* stream_Part_map_0::24
+stream_Measure_map_2 --* stream_Part_map_0::35
+stream_Part_map_1 --* stream_Stream_map::5
+stream_Measure_map_3 --* stream_Part_map_1::1
+stream_Voice_map_0 --* stream_Measure_map_3::6
+stream_Part_map_2 --* stream_Stream_map::6
+stream_Measure_map_4 --* stream_Part_map_2::1
+
+class note.Rest {
+  + auto offset
+  + auto quarterlenth
+  {method} ...
+}
+
+class note.Note {
+  + auto offset
+  + auto pitch
+  + auto volume
+  + auto quarterlenth
+  {method} ...
+}
+
+class chord.Chord {
+  + auto offset
+  + auto pitches
+  + auto volume
+  + auto quarterlenth
+  {method} ...
+}
+
+class note.GeneralNote{
+  + auto isNote
+  + auto isRest
+  + auto isChord
+  + auto lyrics
+  {method} ...
+}
+
+note.GeneralNote <|-- note.Rest
+note.GeneralNote <|-- note.Note
+note.GeneralNote <|-- chord.Chord
+@enduml
